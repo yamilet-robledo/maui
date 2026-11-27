@@ -4,55 +4,106 @@
              xmlns:vm="clr-namespace:MauiApp.ViewModels"
              x:Class="MauiApp.Views.MainPage"
              x:DataType="vm:MainViewModel"
-             Title="Calculadora">
-    <Grid Padding="16" RowSpacing="12" RowDefinitions="*,Auto">
-        <VerticalStackLayout Grid.Row="0" VerticalOptions="End" HorizontalOptions="End" Spacing="4">
-            <Label Text="{Binding Expression}" FontSize="20" TextColor="Gray" HorizontalTextAlignment="End" />
-            <Label Text="{Binding Display}" FontSize="56" HorizontalTextAlignment="End"
-                   LineBreakMode="TailTruncation" MaxLines="1" />
+             BackgroundColor="#000000"
+             Title="Temperatura">
+
+    <Grid Padding="20" RowSpacing="16" RowDefinitions="Auto,*,Auto">
+
+        <!-- Encabezado -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="16" VerticalOptions="Center" Margin="0,4,0,12">
+            <Label Text="←" FontSize="26" TextColor="White" VerticalOptions="Center" />
+            <Label Text="Temperatura" FontSize="22" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <!-- Área de selección y valores -->
+        <VerticalStackLayout Grid.Row="1" Spacing="28" VerticalOptions="Start" Margin="0,12,0,0">
+
+            <!-- Fila Unidad Origen -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Picker Grid.Column="0"
+                        ItemsSource="{Binding Units}"
+                        SelectedItem="{Binding SourceUnit}"
+                        TextColor="White"
+                        TitleColor="Gray"
+                        FontSize="20"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="Center" />
+
+                <Label Grid.Column="1"
+                       Text="{Binding InputDisplay}"
+                       FontSize="32"
+                       TextColor="#FF6602B3"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"
+                       LineBreakMode="TailTruncation"
+                       MaxLines="1" />
+            </Grid>
+
+            <!-- Fila Unidad Destino -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Picker Grid.Column="0"
+                        ItemsSource="{Binding Units}"
+                        SelectedItem="{Binding TargetUnit}"
+                        TextColor="White"
+                        TitleColor="Gray"
+                        FontSize="20"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="Center" />
+
+                <Label Grid.Column="1"
+                       Text="{Binding ResultDisplay}"
+                       FontSize="32"
+                       TextColor="White"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"
+                       LineBreakMode="TailTruncation"
+                       MaxLines="1" />
+            </Grid>
+
         </VerticalStackLayout>
-        <Grid Grid.Row="1" RowSpacing="8" ColumnSpacing="8"
-              RowDefinitions="72,72,72,72,72" ColumnDefinitions="*,*,*,*">
-            <Button Grid.Row="0" Grid.Column="0" Text="C" Command="{Binding ClearCommand}"
-                    BackgroundColor="#D4D4D2" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="0" Grid.Column="1" Text="⌫" Command="{Binding BackspaceCommand}"
-                    BackgroundColor="#D4D4D2" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="0" Grid.Column="2" Text="%" Command="{Binding PercentCommand}"
-                    BackgroundColor="#D4D4D2" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="0" Grid.Column="3" Text="÷" Command="{Binding OperatorCommand}" CommandParameter="÷"
-                    BackgroundColor="#FFD000F5" TextColor="White" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="1" Grid.Column="0" Text="7" Command="{Binding DigitCommand}" CommandParameter="7"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="1" Grid.Column="1" Text="8" Command="{Binding DigitCommand}" CommandParameter="8"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="1" Grid.Column="2" Text="9" Command="{Binding DigitCommand}" CommandParameter="9"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="1" Grid.Column="3" Text="×" Command="{Binding OperatorCommand}" CommandParameter="×"
-                    BackgroundColor="#FFD000F5" TextColor="White" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="2" Grid.Column="0" Text="4" Command="{Binding DigitCommand}" CommandParameter="4"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="2" Grid.Column="1" Text="5" Command="{Binding DigitCommand}" CommandParameter="5"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="2" Grid.Column="2" Text="6" Command="{Binding DigitCommand}" CommandParameter="6"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="2" Grid.Column="3" Text="−" Command="{Binding OperatorCommand}" CommandParameter="−"
-                    BackgroundColor="#FFD000F5" TextColor="White" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="3" Grid.Column="0" Text="1" Command="{Binding DigitCommand}" CommandParameter="1"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="3" Grid.Column="1" Text="2" Command="{Binding DigitCommand}" CommandParameter="2"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="3" Grid.Column="2" Text="3" Command="{Binding DigitCommand}" CommandParameter="3"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="3" Grid.Column="3" Text="+" Command="{Binding OperatorCommand}" CommandParameter="+"
-                    BackgroundColor="#FFD000F5" TextColor="White" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="4" Grid.Column="0" Text="±" Command="{Binding ToggleSignCommand}"
-                    BackgroundColor="#D4D4D2" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="4" Grid.Column="1" Text="0" Command="{Binding DigitCommand}" CommandParameter="0"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="4" Grid.Column="2" Text="." Command="{Binding DecimalCommand}"
-                    BackgroundColor="#E8E8E6" TextColor="Black" FontSize="26" CornerRadius="12" />
-            <Button Grid.Row="4" Grid.Column="3" Text="=" Command="{Binding EqualsCommand}"
-                    BackgroundColor="#FFD000F5" TextColor="White" FontSize="26" CornerRadius="12" />
+
+        <!-- Teclado numérico -->
+        <Grid Grid.Row="2" RowSpacing="10" ColumnSpacing="10"
+              RowDefinitions="74,74,74,74" ColumnDefinitions="*,*,*,*">
+
+            <!-- Fila 0 -->
+            <Button Grid.Row="0" Grid.Column="0" Text="7" Command="{Binding DigitCommand}" CommandParameter="7"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="0" Grid.Column="1" Text="8" Command="{Binding DigitCommand}" CommandParameter="8"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="0" Grid.Column="2" Text="9" Command="{Binding DigitCommand}" CommandParameter="9"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="0" Grid.Column="3" Text="C" Command="{Binding ClearCommand}"
+                    BackgroundColor="#FF6602B3" TextColor="White" FontSize="26" CornerRadius="18" />
+
+            <!-- Fila 1 -->
+            <Button Grid.Row="1" Grid.Column="0" Text="4" Command="{Binding DigitCommand}" CommandParameter="4"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="1" Grid.Column="1" Text="5" Command="{Binding DigitCommand}" CommandParameter="5"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="1" Grid.Column="2" Text="6" Command="{Binding DigitCommand}" CommandParameter="6"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="1" Grid.Column="3" Text="⌫" Command="{Binding BackspaceCommand}"
+                    BackgroundColor="#FF6602B3" TextColor="White" FontSize="24" CornerRadius="18" />
+
+            <!-- Fila 2 -->
+            <Button Grid.Row="2" Grid.Column="0" Text="1" Command="{Binding DigitCommand}" CommandParameter="1"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="2" Grid.Column="1" Text="2" Command="{Binding DigitCommand}" CommandParameter="2"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="2" Grid.Column="2" Text="3" Command="{Binding DigitCommand}" CommandParameter="3"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Text="+/−" Command="{Binding ToggleSignCommand}"
+                    BackgroundColor="#FF6602B3" TextColor="White" FontSize="26" CornerRadius="18" />
+
+            <!-- Fila 3 -->
+            <Button Grid.Row="3" Grid.Column="0" Text="00" Command="{Binding DigitCommand}" CommandParameter="00"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="24" CornerRadius="18" />
+            <Button Grid.Row="3" Grid.Column="1" Text="0" Command="{Binding DigitCommand}" CommandParameter="0"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+            <Button Grid.Row="3" Grid.Column="2" Text="." Command="{Binding DecimalCommand}"
+                    BackgroundColor="#1C1C1E" TextColor="White" FontSize="26" CornerRadius="18" />
+
         </Grid>
     </Grid>
 </ContentPage>
